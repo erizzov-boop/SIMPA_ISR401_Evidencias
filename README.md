@@ -49,7 +49,14 @@ recomendado por el docente responsable de la asignatura.
 
 | Contenedor | Tamaño | Contenido | Participantes |
 |---|---:|---|---|
-| `Actas_MemberCheck_Originales.7z` | 165 KB | Actas originales firmadas, individuales y consolidada | ENTR-01, ENTR-02, ENTR-13 |
+| `Actas_MemberCheck_Originales.7z` | 165 KB | Actas individuales originales firmadas | ENTR-01, ENTR-02, ENTR-13 |
+| `Actas_MemberCheck_consolidada_original.7z` | 58 KB | Acta consolidada de la ronda, original firmada | Ronda completa — ver nota abajo |
+
+### Evidencia de gobernanza del equipo
+
+| Contenedor | Tamaño | Contenido | Participantes |
+|---|---:|---|---|
+| `Declaracion_Identidades_git_original.7z` | 1,6 MB | Declaración de identidades Git, original firmado por los seis integrantes | Equipo AHMRV — ver nota abajo |
 
 **Ningún nombre de contenedor lleva sufijo `_01`** salvo los cinco de video de
 entrevistas, que están numerados de `_01` a `_05`.
@@ -57,22 +64,25 @@ entrevistas, que están numerados de `_01` a `_05`.
 El inventario detallado por archivo individual —nombre, tipo, fecha, código de
 participante, duración, tamaño, SHA-256 precifrado y contenedor de origen— está
 en [`fichas_tecnicas.csv`](https://github.com/AlanNVR/SIMPA_ISR401/blob/main/02_Evidencias/00_Restringido/fichas_tecnicas.csv)
-del repositorio principal, con **69 filas**, y no se duplica aquí. El reporte
+del repositorio principal, con **71 filas**, y no se duplica aquí. El reporte
 [`verificacion_fichas.md`](https://github.com/AlanNVR/SIMPA_ISR401/blob/main/02_Evidencias/00_Restringido/verificacion_fichas.md)
 comprueba por petición HTTP que cada contenedor declarado existe con ese nombre
 exacto.
 
-> El acta consolidada de la ronda de miembro-verificación se deposita en
-> `Actas_MemberCheck_Originales.7z` pero no tiene fila propia en el inventario:
-> corresponde a la ronda completa y no a un participante individual, y el
-> inventario se organiza por participante.
+> **Sobre los dos últimos contenedores.** El acta consolidada de
+> miembro-verificación y la declaración de identidades Git no corresponden a un
+> participante individual, sino a la ronda completa y al equipo en su
+> conjunto. Por ello se identifican en el inventario con los códigos
+> `CONSOLIDADA-MC` y `CONSOLIDADA-EQUIPO` en lugar de un código `ENTR-XX` o
+> `WT-XX`, y sus SHA-256 se calcularon sobre el documento original antes de
+> cifrar, igual que el resto del inventario.
 
 ## 4. Cifrado
 
 Todos los contenedores son `.7z` generados con **cifrado de cabecera**
 (`-mhe=on`): sin la contraseña no puede listarse siquiera el nombre de los
-archivos que contienen. Es una medida deliberada, porque esos nombres incluyen el
-rol o el perfil del participante.
+archivos que contienen. Es una medida deliberada, porque esos nombres incluyen
+el rol o el perfil del participante.
 
 ## 5. Procedimiento de descarga, descifrado y verificación
 
@@ -95,20 +105,26 @@ sha256sum -c checksums_evidencias.sha256
 
 ## 6. Códigos de participante
 
-Se usan dos series independientes, correspondientes a dos estudios distintos:
+Se usan dos series independientes, correspondientes a dos estudios distintos,
+más dos códigos reservados para documentos colectivos:
 
-| Serie | Estudio | Rango |
-|---|---|---|
-| `ENTR-XX` | Entrevistas semiestructuradas y miembro-verificación | ENTR-01 a ENTR-16 |
-| `WT-XX` | Validación por walkthrough | WT-01 a WT-06 |
+| Código | Alcance |
+|---|---|
+| `ENTR-XX` | Entrevistas semiestructuradas y miembro-verificación individual — ENTR-01 a ENTR-16 |
+| `WT-XX` | Validación por walkthrough — WT-01 a WT-06 |
+| `CONSOLIDADA-MC` | Acta consolidada de la ronda de miembro-verificación, no de un participante |
+| `CONSOLIDADA-EQUIPO` | Declaración de identidades Git, firmada por los seis integrantes |
 
-Las series no se cruzan. Las actas de miembro-verificación usan `ENTR-XX` porque
-corresponden a las mismas personas y al mismo estudio que las entrevistas.
+Las series `ENTR-XX` y `WT-XX` no se cruzan. Las actas de miembro-verificación
+usan `ENTR-XX` porque corresponden a las mismas personas y al mismo estudio que
+las entrevistas. Cuando un participante de walkthrough fue también
+entrevistado, recibe igualmente un código `WT-XX` propio, y la correspondencia
+entre ambos códigos se registra únicamente en la zona restringida del
+repositorio principal. Publicar esa correspondencia aumentaría el riesgo de
+reidentificación.
 
-Cuando un participante de walkthrough fue también entrevistado, recibe
-igualmente un código `WT-XX` propio, y la correspondencia entre ambos códigos se
-registra únicamente en la zona restringida del repositorio principal. Publicar
-esa correspondencia aumentaría el riesgo de reidentificación.
+Los dos códigos `CONSOLIDADA-*` no son una serie de participantes: se usan una
+sola vez cada uno, para el documento específico que describen.
 
 ## 7. Contraseña y acceso
 
@@ -121,6 +137,6 @@ asignatura.
 
 Este repositorio **no está cubierto por la licencia CC BY 4.0** del repositorio
 principal. El material aquí alojado es identificable (consentimientos y actas
-originales, video y audio sin anonimizar) y permanece en zona restringida [R]
-según la Sección 3 de la guía de la Entrega 4. No se redistribuye ni forma parte
-del depósito abierto en Zenodo.
+originales, firmas manuscritas, video y audio sin anonimizar) y permanece en
+zona restringida [R] según la Sección 3 de la guía de la Entrega 4. No se
+redistribuye ni forma parte del depósito abierto en Zenodo.
